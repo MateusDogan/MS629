@@ -1,4 +1,5 @@
-import pycutest
+#import pycutest
+
 import numpy as np
 import time
 
@@ -12,14 +13,11 @@ testes = [
 
 algo = ["Gradiente", "BFGS", "Espectral"]
 
-print1="1 - ARGLINA\n2 - ARGLINB\n3 - BA-L1SPLS\n4 - BIGGS6\n5 - BROWNAL\n6 - COATING\n7 - FLETCHCR\n8 - GAUSS2LS\n9 - GENROSE\n10 - HAHN1LS\n11 - HEART6LS\n12 - HILBERTB\n13 - HYDCAR6LS\n14 - LANCZOS1LS\n15 - LANCZOS2LS\n16 - LRIJCNN1\n17 - LUKSAN12LS\n18 - LUKSAN16LS\n19 - OSBORNEA\n20 - PALMER1C\n21 - PALMER3C\n22 - PENALTY2\n23 - PENALTY3\n24 - QING\n25 - ROSENBR\n26 - STRTCHDV\n27 - TESTQUAD\n28 - THURBERLS\n29 - TRIGON1\n30 - TOINTGOR\nDigite o número do problema de teste desejado:"
+print1 = "1 - ARGLINA\n2 - ARGLINB\n3 - BA-L1SPLS\n4 - BIGGS6\n5 - BROWNAL\n6 - COATING\n7 - FLETCHCR\n8 - GAUSS2LS\n9 - GENROSE\n10 - HAHN1LS\n11 - HEART6LS\n12 - HILBERTB\n13 - HYDCAR6LS\n14 - LANCZOS1LS\n15 - LANCZOS2LS\n16 - LRIJCNN1\n17 - LUKSAN12LS\n18 - LUKSAN16LS\n19 - OSBORNEA\n20 - PALMER1C\n21 - PALMER3C\n22 - PENALTY2\n23 - PENALTY3\n24 - QING\n25 - ROSENBR\n26 - STRTCHDV\n27 - TESTQUAD\n28 - THURBERLS\n29 - TRIGON1\n30 - TOINTGOR\nDigite o número do problema de teste desejado:"
 print2 = "1 - Gradiente\n2 - BFGS\n3 - Espectral\nDigite o numero do algoritmo de descida desejado:"
 print3 = "1 - Armijo\n2 - Armijo Modificado\n3 - Passo Constante\nDigite o numero do tipo de busca desejado:"
 
 search = ["Armijo", "Constante", "Modificada"]
-
-def feature():
-    None
 
 class parameters:
     def __init__(self,function: str,algorithm: str,search: str = "Armijo"):
@@ -165,9 +163,9 @@ def direction(parameters: parameters) -> np.array:
         
 #--------------------------------------------------------------------------------------------------
 #Condição de Armijo
-def Armijo(function: parameters, passo: float, dk, a, b) ->bool:
-    aux = function.objective(function.xk + passo*dk)                  #utilizar armijo so para verificar                        
-    if (aux <= passo*a + b):                                          #se o passo e bom ou nao
+def Armijo(function: parameters, passo: float, dk, alpha, beta) ->bool:
+    aux = function.objective(function.xk + passo*dk)                            #utilizar armijo so para verificar                        
+    if (aux <= passo*alpha + beta):                                             #se o passo e bom ou nao
         if function.busca == "Modificada":
             function.salva_fila(aux)
         return True
@@ -198,7 +196,7 @@ def armijo_bfgs(f, xk, grad_k, dk, v = 0, alpha = 1, beta = 0.5, eta = 1.0e-4, m
 def step_parameter(parameters: parameters, direction) -> float:
     if parameters.busca() == "Constante":
         return 1.0
-#------------------------Passos nao constantes----------------
+    #------------------------Passos nao constantes----------------
     if parameters.busca() == "Modificada":
         M = parameters.modified()
     else:
@@ -233,7 +231,7 @@ def minimize(function: parameters, tolerance = 1e-4):
 
 #-----------------------------------------------main-------------------------------------------------------------------------------------------------------
 def main():
-    problema = testes[int(input(print1))-1]                                     #sera com base na entrada qual funcao minimizar
+    problema = testes[int(input(print1))-1]                                 #sera com base na entrada qual funcao minimizar
 
     descida = algo[int(input(print2))-1]                                    #e qual algoritmo de descida escolher tambem
     if descida == "Espectral":                                              #No cado do metodo gradiente Espectral 
