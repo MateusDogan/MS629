@@ -1,4 +1,4 @@
-#import pycutest
+import pycutest
 
 import numpy as np
 import time
@@ -18,6 +18,9 @@ print2 = "1 - Gradiente\n2 - BFGS\n3 - Espectral\nDigite o numero do algoritmo d
 print3 = "1 - Armijo\n2 - Armijo Modificado\n3 - Passo Constante\nDigite o numero do tipo de busca desejado:"
 
 search = ["Armijo", "Constante", "Modificada"]
+
+def shhhh():
+    None
 
 class parameters:
     def __init__(self,function: str,algorithm: str,search: str = "Armijo"):
