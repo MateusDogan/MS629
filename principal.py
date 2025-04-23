@@ -18,6 +18,9 @@ print3 = "1 - Armijo\n2 - Armijo Modificado\n3 - Passo Constante\nDigite o numer
 
 search = ["Armijo", "Constante", "Modificada"]
 
+def feature():
+    None
+
 class parameters:
     def __init__(self,function: str,algorithm: str,search: str = "Armijo"):
         self.function = pycutest.import_problem(function)                #deixar so os metodos publicos depois
